@@ -1,11 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% if user.is_authenticated %}
+<h1>You are already logged in</h1>
+{% else %}
 <h1>Log In</h1>
 <form method="POST" action="">
     {% csrf_token %}
     {{form.as_p}}
     <button type="submit">Login</button>
 </form>
+
+{% endif %}
 
 {% endblock content %}

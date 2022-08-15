@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 
@@ -14,3 +14,10 @@ def login_view(request):
         form = AuthenticationForm(request)
     context = {'form': form}
     return render(request, "accounts/login.html", context)
+
+def logout_view(request):
+    if request.method == "POST":
+        logout(request)
+        return redirect('/')
+    return render(request, "accounts/logout.html", {})
+
