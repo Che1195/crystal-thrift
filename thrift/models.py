@@ -7,7 +7,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField("auth.User", null=True, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
-    profile_picture = models.ImageField(null=True, blank=True) 
+    profile_picture = models.ImageField(null=True, blank=True, upload_to="images/") 
     email = models.EmailField(max_length=128)
     building = models.IntegerField(blank=True, null=True)
     floor = models.IntegerField(blank=True, null=True)
@@ -16,3 +16,6 @@ class UserProfile(models.Model):
     def get_absolute_url(self):
         """takes you to the user's profile page"""
         pass
+
+class Item(models.Model):
+    pass

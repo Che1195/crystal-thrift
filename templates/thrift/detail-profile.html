@@ -1,8 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
 <ul>
     <li>{{ profile_obj.first_name }}</li>
     <li>{{ profile_obj.last_name }}</li>
-    <li>{{ profile_obj.profile_picture }}</li>
+    <li>
+        <img style="height:100px; width: 100px;" src="/images/{{ profile_obj.profile_picture }}" alt="Profile Picture">
+    </li>
     <li>{{ profile_obj.email }}</li>
     <li>Building {{ profile_obj.building }}</li>
     <li>Floor {{ profile_obj.floor }}</li>
 </ul>
+{% endblock content %}
