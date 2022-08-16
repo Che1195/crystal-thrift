@@ -1,6 +1,10 @@
 from django import forms
 from .models import UserProfile
 
+# TODO
+# create validators for
+#   - email, building, floor 
+
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile

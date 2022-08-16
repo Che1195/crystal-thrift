@@ -13,6 +13,8 @@
 
 {% if user.is_authenticated %}
 <h3><a href="/logout">logout, {{user.username}}</a></h3>
+<h3><a href="/create-profile">Make Profile</a></h3>
+<h3><a href="/detail-profile">View Profile</a></h3>
 {% else %}
 <h3><a href="/login">login</a></h3>
 <h3><a href="/register">register</a></h3>
