@@ -20,6 +20,8 @@ from accounts.views import (
     register_view,
     login_view,
     logout_view,
+)
+from thrift.views import (
     create_profile_view,
     detail_profile_view,
 )
