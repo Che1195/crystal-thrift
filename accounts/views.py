@@ -1,6 +1,7 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
+from .forms import UserProfileForm
 
 # Create your views here.
 def register_view(request):
@@ -28,4 +29,16 @@ def logout_view(request):
         logout(request)
         return redirect('/')
     return render(request, "accounts/logout.html", {})
+
+def create_user_profile_view(request):
+    form = UserProfileForm(request.POST or None)
+    context = {
+        "form": form
+    }
+    if form.is_valid():
+        user_profile_object = form.save()
+        context["form"] = UserProfileForm()
+        return redirect("/")
+    return render(request, "accounts/create-user-profile.html", context)
+    
 

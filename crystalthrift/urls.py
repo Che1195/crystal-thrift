@@ -20,6 +20,7 @@ from accounts.views import (
     register_view,
     login_view,
     logout_view,
+    create_user_profile_view,
 )
 
 urlpatterns = [
@@ -27,5 +28,6 @@ urlpatterns = [
     path('register/', register_view),
     path('login/', login_view),
     path('logout/', logout_view),
+    path('create-user-profile/', create_user_profile_view),
     path('', home_view),
 ]
