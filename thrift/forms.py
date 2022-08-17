@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserProfile
+from .models import UserProfile, Item
 
 # TODO
 # create validators for
@@ -10,6 +10,16 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ['first_name', 'last_name', 'profile_picture',
                 'email', 'building', 'floor']
+    
+    def clean(self):
+        """making sure all data being submitted is eligible"""
+        pass
+
+class ItemForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = "__all__"
+        exclude = ['user']
     
     def clean(self):
         """making sure all data being submitted is eligible"""

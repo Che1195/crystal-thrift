@@ -24,8 +24,9 @@ from accounts.views import (
     logout_view,
 )
 from thrift.views import (
-    create_profile_view,
-    detail_profile_view,
+    profile_create_view,
+    profile_detail_view,
+    item_create_view,
 )
 
 urlpatterns = [
@@ -33,8 +34,9 @@ urlpatterns = [
     path('register/', register_view),
     path('login/', login_view),
     path('logout/', logout_view),
-    path('thrift/create-profile/', create_profile_view),
-    path('thrift/detail-profile/', detail_profile_view),
+    path('thrift/profile-create/', profile_create_view),
+    path('thrift/profile-detail/<id>/', profile_detail_view, name="profile-detail"),
+    path('thrift/item-create/', item_create_view),
     path('', home_view),
 ]
 
