@@ -35,7 +35,7 @@ urlpatterns = [
     path('login/', login_view),
     path('logout/', logout_view),
     path('thrift/profile-create/', profile_create_view),
-    path('thrift/profile-detail/<id>/', profile_detail_view, name="profile-detail"),
+    path('thrift/profile-detail/<slug:slug>/', profile_detail_view, name="profile-detail"),
     path('thrift/item-create/', item_create_view),
     path('', home_view),
 ]

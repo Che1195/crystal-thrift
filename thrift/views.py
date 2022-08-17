@@ -36,10 +36,10 @@ def profile_create_view(request):
     return render(request, "thrift/profile-create.html", context)
 
 @login_required(login_url='/login/')
-def profile_detail_view(request, id):
+def profile_detail_view(request, slug):
     profile_obj = None
     try:
-        profile_obj = UserProfile.objects.get(id=id)
+        profile_obj = UserProfile.objects.get(slug=slug)
         context = {
             'profile_obj': profile_obj
         }

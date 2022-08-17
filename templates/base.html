@@ -14,7 +14,7 @@
     {% if not user.userprofile %}
     <h3><a href="/thrift/profile-create/">Make Profile</a></h3>
     {% else %}
-    <h3><a href="/thrift/profile-detail/{{user.userprofile.id}}">View Profile</a></h3>
+    <h3><a href="/thrift/profile-detail/{{user.userprofile.slug}}">View Profile</a></h3>
     <h3><a href="/thrift/item-create/">Add Item</a></h3>
     {% endif %}
     {% else %}
