@@ -11,5 +11,10 @@
 {% endblock heading %}
 
 {% block content %}
-<p>List items for sale</p>
+<h2>List items for sale</h2>
+<ul>
+    {% for item in items %}
+    <li><a href="thrift/item-detail/{{item.slug}}/">{{item}}</a></li>
+    {% endfor %}
+</ul>
 {% endblock content %}

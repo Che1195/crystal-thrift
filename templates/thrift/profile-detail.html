@@ -11,4 +11,18 @@
     <li>Building {{ profile_obj.building }}</li>
     <li>Floor {{ profile_obj.floor }}</li>
 </ul>
+<h2>User Items</h2>
+
+{% for item in user_items %}
+<ul>
+    <li><a href="/thrift/item-detail/{{item.slug}}/">{{ item.name }}</a><span> ${{item.price}}</span></li>
+    <li>listed by {{item.user}}</li>
+    <li>{{item.description}}</li>
+    <li><img style="width: 100px; height: 100px" src="/images/{{item.picture}}" alt="Picture of Item"></li>
+    <li>Condition: {{item.condition}}</li>
+</ul>
+<br><br>
+{% endfor %}
+<h3><a href="/thrift/item-create/">+ Item</a></h3>
+
 {% endblock content %}

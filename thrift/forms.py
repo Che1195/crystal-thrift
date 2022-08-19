@@ -8,8 +8,8 @@ from .models import UserProfile, Item
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['first_name', 'last_name', 'profile_picture',
-                'email', 'building', 'floor']
+        fields = "__all__"
+        exclude = ['user', 'slug', 'modified']
     
     def clean(self):
         """making sure all data being submitted is eligible"""
@@ -19,7 +19,7 @@ class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
         fields = "__all__"
-        exclude = ['user']
+        exclude = ['user', 'slug', 'modified']
     
     def clean(self):
         """making sure all data being submitted is eligible"""

@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <h1><a href="/">Home</a></h1>
     {% if user.is_authenticated %}
     <h3><a href="/logout">logout, {{user.username}}</a></h3>
     {% if not user.userprofile %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+    <ul>
+        <li>{{ item.name }}<span> ${{item.price}}</span></li>
+        <li>listed by {{item.user}}</li>
+        <li>{{item.description}}</li>
+        <li><img style="width: 100px; height: 100px" src="/images/{{item.picture}}" alt="Picture of Item"></li>
+        <li>Condition: {{item.condition}}</li>
+    </ul>
+</form>
+{% endblock content %}

@@ -8,9 +8,11 @@ from django.db import IntegrityError
 from django.shortcuts import render, redirect
 
 from .forms import UserProfileForm, ItemForm
-from .models import UserProfile
+from .models import UserProfile, Item
 
 from .models import UserProfile
+from .models import Item
+
 
 
 # Create your views here.
@@ -40,8 +42,10 @@ def profile_detail_view(request, slug):
     profile_obj = None
     try:
         profile_obj = UserProfile.objects.get(slug=slug)
+        user_items = Item.objects.order_by("-created").filter(user=profile_obj.user)
         context = {
-            'profile_obj': profile_obj
+            'profile_obj': profile_obj,
+            'user_items': user_items,
         }
     except ObjectDoesNotExist:
         return redirect("/thrift/profile-create/")
@@ -68,8 +72,11 @@ def item_create_view(request):
     return render(request, "thrift/item-create.html", context)
 
 # need to implement slug fields for this to make sense
-def detail_item_view(request):
-    context = {}
+def item_detail_view(request, slug):
+    item_obj = Item.objects.get(slug=slug)
+    context = {
+        "item": item_obj
+    }
     return render(request, "thrift/item-detail.html", context)
     
     
