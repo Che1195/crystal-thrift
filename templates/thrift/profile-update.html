@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if user.userprofile %}
+<!-- the enctype attribute is telling our form that it is ok to accept data -->
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Create Profile"></input>
+</form>
+{% else %}
+{{ msg }}
+{% endif %}
+{% endblock content %}

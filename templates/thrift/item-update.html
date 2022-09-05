@@ -1,14 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-{% if msg %}
-<p>{{msg}}</p>
-{% endif %}
-
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" name="add-item">
+    <input type="submit" name="add-item" value="Save">
 </form>
 {% endblock content %}

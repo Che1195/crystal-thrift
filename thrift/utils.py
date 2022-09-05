@@ -11,5 +11,7 @@ CHOICES = {
     'item-type':
         (("Clothes", "Clothes"), ("Kitchen", "Kitchen"),
         ("Furniture", "Furniture"), ("Sporting", "Sporting"), 
-        ("Fitness", "Fitness"), ("Art", "Art"), ("Misc", "Misc"))
+        ("Fitness", "Fitness"), ("Art", "Art"), ("Misc", "Misc")),
+    'sale-status':
+        (("available", "available"), ("pending", "pending"), ("sold", "sold"))
 }

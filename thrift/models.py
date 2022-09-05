@@ -29,25 +29,39 @@ class UserProfile(models.Model):
 
     def get_absolute_url(self):
         """takes you to the user's profile page"""
-        pass
+        return f"/thrift/profile-detail/{self.slug}"
 
 class Item(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
-    name = models.CharField(null=True, max_length=128)
+    slug = models.SlugField(null=True, default=uuid.uuid4)    
+    title = models.CharField(null=True, max_length=128)
     description = models.TextField(null=True, max_length=512)
     picture = models.ImageField(null=True, blank=True, upload_to="images/")
     condition = models.CharField(null=True, max_length=20, choices=CHOICES['condition'])
     item_type = models.CharField(null=True, max_length=20, choices=CHOICES['item-type'])
     price = models.DecimalField(null=True, max_digits=9, decimal_places=2)
-    slug = models.SlugField(default=uuid.uuid4, null=True)    
-    created = models.DateTimeField(null=True, editable=False)
-    modified = models.DateTimeField(null=True)
+    sale_status = models.CharField(null=True, max_length=20, choices=CHOICES['sale-status'], default="available")
+    created = models.DateTimeField(null=True, editable=False, auto_now_add=True)
+    modified = models.DateTimeField(null=True, auto_now=True)
+    date_sold = models.DateTimeField(null=True, blank=True, editable=False) # a date is given when the sold switch is flicked
+
+    def get_absolute_url(self):
+        """takes you to the user's profile page"""
+        return f"/thrift/item-detail/{self.slug}"
 
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
-        if not self.id:
+        # updating the created and modified timestamp fields
+        if not self.id: 
+            # if the item does not have an id field 
+            # give the created field the current time
             self.created = timezone.now()
         self.modified = timezone.now()
+        # changing the date_sold field based on changes to the sale_status
+        if self.sale_status == "sold":
+            self.date_sold = timezone.now()
+        else:
+            self.date_sold = None 
         return super().save(*args, **kwargs)
 
     

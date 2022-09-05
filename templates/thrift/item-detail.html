@@ -3,11 +3,21 @@
 {% block content %}
 <form method="POST" enctype="multipart/form-data">
     <ul>
-        <li>{{ item.name }}<span> ${{item.price}}</span></li>
+        <li>{{ item.title }}<span> ${{item.price}}</span></li>
+        {% if item.sale_status == "sold" %}
+        <li>NO LONGER AVAILABLE</li>
+        {% elif item.sale_status == "pending" %}
+        <li>SALE PENDING</li>
+        {% else %}
+        <li>AVAILABLE</li>
+        {% endif %}
         <li>listed by {{item.user}}</li>
         <li>{{item.description}}</li>
         <li><img style="width: 100px; height: 100px" src="/images/{{item.picture}}" alt="Picture of Item"></li>
         <li>Condition: {{item.condition}}</li>
+        {% if item.user == user %}
+        <li><a href="/thrift/item-update/{{item.slug}}">Update Item</a></li>
+        {% endif %}
     </ul>
 </form>
 {% endblock content %}

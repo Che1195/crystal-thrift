@@ -1,5 +1,8 @@
 from django import forms
 from .models import UserProfile, Item
+from datetime import datetime
+
+
 
 # TODO
 # create validators for
@@ -19,8 +22,14 @@ class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
         fields = "__all__"
-        exclude = ['user', 'slug', 'modified']
+        exclude = ['user', 'slug', 'modified', 'sale_status']
     
     def clean(self):
         """making sure all data being submitted is eligible"""
         pass
+
+class ItemUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = "__all__"
+        exclude = ['user', 'slug', 'modified']
