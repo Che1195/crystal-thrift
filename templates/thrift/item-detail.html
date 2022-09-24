@@ -2,8 +2,8 @@
 
 {% block content %}
 <form method="POST" enctype="multipart/form-data">
+    <h3>{{ item.title }}<span> ${{item.price}}</span></h3>
     <ul>
-        <li>{{ item.title }}<span> ${{item.price}}</span></li>
         {% if item.sale_status == "sold" %}
         <li>NO LONGER AVAILABLE</li>
         {% elif item.sale_status == "pending" %}

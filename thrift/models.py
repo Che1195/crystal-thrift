@@ -67,7 +67,8 @@ class Item(models.Model):
         return super().save(*args, **kwargs)
 
 class ItemImage(models.Model):
-    item = models.ForeignKey(Item, null=True, blank=True, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, null=True, blank=True, on_delete=models.CASCADE, related_name="item_images")
+        # added related related_name="item_images" for referencing the child from the parent in templates
     image = models.ImageField(null=True, blank=True, upload_to="images/")
 
     
