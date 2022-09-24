@@ -131,7 +131,7 @@ def item_update_view(request, slug):
     """
     item_obj = get_object_or_404(Item, slug=slug, user=request.user)
     item_form = ItemForm(request.POST or None, instance=item_obj)
-    ItemImageFormset = modelformset_factory(ItemImage, form=ItemImageForm, extra=0)
+    ItemImageFormset = modelformset_factory(ItemImage, form=ItemImageForm, max_num=5, extra=5)
     qs = item_obj.itemimage_set.all()
     item_image_formset = ItemImageFormset(request.POST or None, request.FILES or None, queryset=qs)
     context = {
@@ -143,11 +143,12 @@ def item_update_view(request, slug):
         parent = item_form.save(commit=False)
         parent.save()
         for form in item_image_formset:
-            child = form.save(commit=False)
-            if child.item is None:
-                print("Added new")
-                child.item = parent
-            child.save()
+            if form.cleaned_data != {}: # stops django from saving empty image forms
+                child = form.save(commit=False)
+                if child.item is None:
+                    print("Added new")
+                    child.item = parent
+                    child.save()
         context["message"] = "Data saved."
         return redirect(item_obj.get_absolute_url())
     return render(request, "thrift/item-update.html", context)
