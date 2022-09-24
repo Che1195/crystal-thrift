@@ -3,7 +3,12 @@
 {% block content %}
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ item_form.as_p }}
+
+    {% if item_image_formset %}
+    <h3>Ingredients</h3>
+    {{ item_image_formset.as_p }}
+    {% endif %}
     <input type="submit" name="add-item" value="Save">
 </form>
 {% endblock content %}

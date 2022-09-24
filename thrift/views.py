@@ -1,5 +1,7 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from django.forms.models import modelformset_factory # model form for querysets
+
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 from django.core.exceptions import ObjectDoesNotExist
@@ -128,29 +130,40 @@ def item_update_view(request, slug):
     5. return a render of the item update template
     """
     item_obj = get_object_or_404(Item, slug=slug, user=request.user)
-    form = ItemUpdateForm(request.POST or None, instance=item_obj)
+    item_form = ItemForm(request.POST or None, instance=item_obj)
+    ItemImageFormset = modelformset_factory(ItemImage, form=ItemImageForm, extra=0)
+    qs = item_obj.itemimage_set.all()
+    item_image_formset = ItemImageFormset(request.POST or None, request.FILES or None, queryset=qs)
     context = {
-        "form": form,
-        "object": item_obj,
+        "item_form": item_form,
+        "item_obj": item_obj,
+        "item_image_formset": item_image_formset,
     }
-    if form.is_valid():
-        form.save()
+    if all([item_form.is_valid(), item_image_formset.is_valid()]):
+        parent = item_form.save(commit=False)
+        parent.save()
+        for form in item_image_formset:
+            child = form.save(commit=False)
+            if child.item is None:
+                print("Added new")
+                child.item = parent
+            child.save()
         context["message"] = "Data saved."
         return redirect(item_obj.get_absolute_url())
     return render(request, "thrift/item-update.html", context)
 
-    def item_images_update_view(request, slug):
-        item_obj = get_object_or_404(Item, slug=slug, user=request.user)
-        form = ItemImageForm(request.POST or None, instance=item_obj)
-        context = {
-            "form": form,
-            "object": item_obj,
-        }
-        if form.is_valid():
-            form.save()
-            context["message"] = "Data saved."
-            return redirect(item_obj.get_absolute_url())
-        return render(request, "thrift/item-update.html", context)
+    # def item_images_update_view(request, slug):
+    #     item_obj = get_object_or_404(Item, slug=slug, user=request.user)
+    #     form = ItemImageForm(request.POST or None, instance=item_obj)
+    #     context = {
+    #         "form": form,
+    #         "object": item_obj,
+    #     }
+    #     if form.is_valid():
+    #         form.save()
+    #         context["message"] = "Data saved."
+    #         return redirect(item_obj.get_absolute_url())
+    #     return render(request, "thrift/item-update.html", context)
 
 
     
