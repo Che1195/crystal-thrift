@@ -18,6 +18,6 @@ class ItemAdmin(admin.ModelAdmin):
 admin.site.register(Item, ItemAdmin)  
 
 class ItemImageAdmin(admin.ModelAdmin):
-    list_display = ['image']
+    list_display = ['image', 'item']
 
 admin.site.register(ItemImage, ItemImageAdmin)  

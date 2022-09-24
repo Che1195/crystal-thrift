@@ -44,6 +44,9 @@ class Item(models.Model):
     modified = models.DateTimeField(null=True, auto_now=True)
     date_sold = models.DateTimeField(null=True, blank=True, editable=False) # a date is given when the sold switch is flicked
 
+    def __str__(self):
+        return f"{self.title}"
+    
     def get_absolute_url(self):
         """takes you to the user's profile page"""
         return f"/thrift/item-detail/{self.slug}"
