@@ -13,7 +13,11 @@
         {% endif %}
         <li>listed by {{item.user}}</li>
         <li>{{item.description}}</li>
-        <li><img style="width: 100px; height: 100px" src="/images/{{item.picture}}" alt="Picture of Item"></li>
+        <!-- display images for the item -->
+        {% for image in images %}
+        <li><img style="width: 100px; height: 100px" src="/static/media/{{image.image}}" alt="Picture of Item">
+        </li>
+        {% endfor %}
         <li>Condition: {{item.condition}}</li>
         {% if item.user == user %}
         <li><a href="/thrift/item-update/{{item.slug}}">Update Item</a></li>

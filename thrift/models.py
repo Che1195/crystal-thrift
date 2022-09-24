@@ -36,7 +36,6 @@ class Item(models.Model):
     slug = models.SlugField(null=True, default=uuid.uuid4)    
     title = models.CharField(null=True, max_length=128)
     description = models.TextField(null=True, max_length=512)
-    picture = models.ImageField(null=True, blank=True, upload_to="images/")
     condition = models.CharField(null=True, max_length=20, choices=CHOICES['condition'])
     item_type = models.CharField(null=True, max_length=20, choices=CHOICES['item-type'])
     price = models.DecimalField(null=True, max_digits=9, decimal_places=2)
@@ -63,5 +62,9 @@ class Item(models.Model):
         else:
             self.date_sold = None 
         return super().save(*args, **kwargs)
+
+class ItemImage(models.Model):
+    item = models.ForeignKey(Item, null=True, blank=True, on_delete=models.CASCADE)
+    image = models.ImageField(null=True, blank=True, upload_to="images/")
 
     

@@ -124,18 +124,20 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_URL = '/images/' 
-# defines the url path to the media folder
-# media directory created automatically when we upload our first image
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ] # this allows us to put the media folder in the static folder
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images') + "/"
-# defines the url path of our media
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media') + "/" # defines the url path of our media
+MEDIA_URL = '/media/' 
+# defines the url path to the media folder
+# media directory created automatically when we upload our first image
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserProfile, Item
+from .models import UserProfile, Item, ItemImage
 from datetime import datetime
 
 
@@ -33,3 +33,13 @@ class ItemUpdateForm(forms.ModelForm):
         model = Item
         fields = "__all__"
         exclude = ['user', 'slug', 'modified']
+
+class ItemImageForm(forms.ModelForm):
+    image = forms.ImageField(
+        label = "Image",
+        widget = forms.ClearableFileInput(attrs={"multiple": True}), # "multiple" allows us to use have multiple files get uploaded in the input field
+    )
+
+    class Meta:
+        model = ItemImage
+        fields = ["image"]

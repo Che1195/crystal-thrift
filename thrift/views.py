@@ -7,8 +7,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import UserProfileForm, ItemForm, ItemUpdateForm
-from .models import UserProfile, Item
+from .forms import UserProfileForm, ItemForm, ItemImageForm, ItemUpdateForm
+from .models import UserProfile, Item, ItemImage
 
 from .models import UserProfile
 from .models import Item
@@ -55,7 +55,7 @@ def profile_detail_view(request, slug):
 @login_required(login_url='/login/')
 def profile_update_view(request, slug):
     profile_obj = get_object_or_404(UserProfile, slug=slug, user=request.user)
-    form = UserProfileForm(request.POST or None, instance=profile_obj)
+    form = UserProfileForm(request.POST or None, request.FILES or None, instance=profile_obj)
     context = {
         "form": form,
         "profile_obj": profile_obj,
@@ -78,18 +78,26 @@ def item_create_view(request):
     profile_exists = UserProfile.objects.filter(user=request.user).exists()
     if profile_exists:
         if request.method == "POST":
-            form = ItemForm(request.POST, request.FILES)
+            form = ItemForm(request.POST)
+            files = request.FILES.getlist("image") # retrieves the files uploaded be the user
+            print(files)
             if form.is_valid():
                 try:
-                    item_obj = form.save()
+                    item_obj = form.save(commit=False)
                     item_obj.user = request.user
                     item_obj.save()
+                    for image in files:
+                        # ADD image validation
+                        # ADD error handling
+                        ItemImage.objects.create(item = item_obj, image=image)
+
                     return redirect("/") # should take user to item detail page
                 except IntegrityError as e:
                     return redirect("/")
     else:
         context["msg"] = "You must create a profile first"
     context["form"] = ItemForm()
+    context["imageform"] = ItemImageForm()
     return render(request, "thrift/item-create.html", context)
 
 # need to implement slug fields for this to make sense
@@ -100,8 +108,10 @@ def item_detail_view(request, slug):
     2. add it to the context to be passed to the template
     """
     item_obj = Item.objects.get(slug=slug)
+    item_images = ItemImage.objects.filter(item__slug=slug) # a query of all item images related to this item
     context = {
-        "item": item_obj
+        "item": item_obj,
+        "images": item_images
     }
     return render(request, "thrift/item-detail.html", context)
 
@@ -128,6 +138,20 @@ def item_update_view(request, slug):
         context["message"] = "Data saved."
         return redirect(item_obj.get_absolute_url())
     return render(request, "thrift/item-update.html", context)
+
+    def item_images_update_view(request, slug):
+        item_obj = get_object_or_404(Item, slug=slug, user=request.user)
+        form = ItemImageForm(request.POST or None, instance=item_obj)
+        context = {
+            "form": form,
+            "object": item_obj,
+        }
+        if form.is_valid():
+            form.save()
+            context["message"] = "Data saved."
+            return redirect(item_obj.get_absolute_url())
+        return render(request, "thrift/item-update.html", context)
+
 
     
     

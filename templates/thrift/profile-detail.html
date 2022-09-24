@@ -5,7 +5,8 @@
     <li>{{ profile_obj.first_name }}</li>
     <li>{{ profile_obj.last_name }}</li>
     <li>
-        <img style="height:100px; width: 100px;" src="/images/{{ profile_obj.profile_picture }}" alt="Profile Picture">
+        <img style="height:100px; width: 100px;" src="/static/media/{{ profile_obj.profile_picture }}"
+            alt="Profile Picture">
     </li>
     <li>{{ profile_obj.email }}</li>
     <li>Building {{ profile_obj.building }}</li>
@@ -18,7 +19,7 @@
     <li><a href="/thrift/item-detail/{{item.slug}}/">{{ item.name }}</a><span> ${{item.price}}</span></li>
     <li>listed by {{item.user}}</li>
     <li>{{item.description}}</li>
-    <li><img style="width: 100px; height: 100px" src="/images/{{item.picture}}" alt="Picture of Item"></li>
+    <li><img style="width: 100px; height: 100px" src="/static/media/{{item.picture}}" alt="Picture of Item"></li>
     <li>Condition: {{item.condition}}</li>
 </ul>
 <br><br>
