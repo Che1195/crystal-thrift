@@ -71,4 +71,6 @@ class ItemImage(models.Model):
         # added related related_name="item_images" for referencing the child from the parent in templates
     image = models.ImageField(null=True, blank=True, upload_to="images/")
 
+        
+
     
