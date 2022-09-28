@@ -51,6 +51,11 @@ class Item(models.Model):
         """takes you to the user's profile page"""
         return f"/thrift/item-detail/{self.slug}"
 
+    def get_absolute_user_profile_url(self):
+        """takes you to the user's profile page"""
+        user_profile = UserProfile.objects.get(user=self.user)
+        return f"/thrift/profile-detail/{user_profile.slug}"
+
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
         # updating the created and modified timestamp fields

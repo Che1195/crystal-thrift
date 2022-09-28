@@ -11,7 +11,7 @@
         {% else %}
         <li>AVAILABLE</li>
         {% endif %}
-        <li>listed by {{item.user}}</li>
+        <li>listed by <a href="{{item.get_absolute_user_profile_url}}">{{item.user}}</a></li>
         <li>{{item.description}}</li>
         <!-- display images for the item -->
         {% for image in images %}

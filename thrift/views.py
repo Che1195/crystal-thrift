@@ -130,7 +130,7 @@ def item_update_view(request, slug):
     5. return a render of the item update template
     """
     item_obj = get_object_or_404(Item, slug=slug, user=request.user)
-    item_form = ItemForm(request.POST or None, instance=item_obj)
+    item_form = ItemUpdateForm(request.POST or None, instance=item_obj)
     ItemImageFormset = modelformset_factory(ItemImage, form=ItemImageForm, max_num=5, extra=5)
     qs = item_obj.item_images.all()
     item_image_formset = ItemImageFormset(request.POST or None, request.FILES or None, queryset=qs)
