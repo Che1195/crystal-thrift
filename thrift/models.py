@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 
 import uuid
+import pathlib
 
 from .utils import CHOICES
 
@@ -71,10 +72,15 @@ class Item(models.Model):
             self.date_sold = None 
         return super().save(*args, **kwargs)
 
+def item_image_upload_handler(instance, filename):
+    file_prefix = str(uuid.uuid1()) # uuid1 -> uuid + timestamps
+    return f"images{file_prefix}-{filename}" # creates a new file path for the upload upload adding the uuid to its original name
+
 class ItemImage(models.Model):
     item = models.ForeignKey(Item, null=True, blank=True, on_delete=models.CASCADE, related_name="item_images")
         # added related related_name="item_images" for referencing the child from the parent in templates
-    image = models.ImageField(null=True, blank=True, upload_to="images/")
+    image = models.ImageField(null=True, blank=True, upload_to=item_image_upload_handler)
+        # this class has built in file type validation
 
         
 
