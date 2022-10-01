@@ -22,11 +22,22 @@
     <li>listed by {{item.user}}</li>
     <li>{{item.description}}</li>
 
-    {% for item_image in item.item_images.all %}
-    <li><img style="width: 100px; height: 100px" src="/static/media/{{item_image.image}}" alt="Picture of Item">
-    </li>
-    {% endfor %}
-    {{ item.item_image }}
+    <!-- LIST PICTURES -->
+    {% if item.image2 %}
+    <li><img src="{{item.image1.url}}" alt="" style="width: 100px; height: 100px"></li>
+    {% endif %}
+    {% if item.image2 %}
+    <li><img src="{{item.image2.url}}" alt="" style="width: 100px; height: 100px"></li>
+    {% endif %}
+    {% if item.image3 %}
+    <li><img src="{{item.image3.url}}" alt="" style="width: 100px; height: 100px"></li>
+    {% endif %}
+    {% if item.image4 %}
+    <li><img src="{{item.image4.url}}" alt="" style="width: 100px; height: 100px"></li>
+    {% endif %}
+    {% if item.image5 %}
+    <li><img src="{{item.image5.url}}" alt="" style="width: 100px; height: 100px"></li>
+    {% endif %}
 
     <li>Condition: {{item.condition}}</li>
 </ul>

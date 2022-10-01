@@ -41,6 +41,11 @@ class Item(models.Model):
     item_type = models.CharField(null=True, max_length=20, choices=CHOICES['item-type'])
     price = models.DecimalField(null=True, max_digits=9, decimal_places=2)
     sale_status = models.CharField(null=True, max_length=20, choices=CHOICES['sale-status'], default="available")
+    image1 = models.ImageField(null=True, blank=False, upload_to="images/") 
+    image2 = models.ImageField(null=True, blank=True, upload_to="images/") 
+    image3 = models.ImageField(null=True, blank=True, upload_to="images/") 
+    image4 = models.ImageField(null=True, blank=True, upload_to="images/") 
+    image5 = models.ImageField(null=True, blank=True, upload_to="images/") 
     created = models.DateTimeField(null=True, editable=False, auto_now_add=True)
     modified = models.DateTimeField(null=True, auto_now=True)
     date_sold = models.DateTimeField(null=True, blank=True, editable=False) # a date is given when the sold switch is flicked
@@ -74,7 +79,7 @@ class Item(models.Model):
 
 def item_image_upload_handler(instance, filename):
     file_prefix = str(uuid.uuid1()) # uuid1 -> uuid + timestamps
-    return f"images{file_prefix}-{filename}" # creates a new file path for the upload upload adding the uuid to its original name
+    return f"images/{file_prefix}-{filename}" # creates a new file path for the upload upload adding the uuid to its original name
 
 class ItemImage(models.Model):
     item = models.ForeignKey(Item, null=True, blank=True, on_delete=models.CASCADE, related_name="item_images")

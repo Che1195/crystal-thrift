@@ -24,12 +24,15 @@ from accounts.views import (
     logout_view,
 )
 from thrift.views import (
+    # Profile CRUD Views
     profile_create_view,
     profile_detail_view,
     profile_update_view,
+    # Item CRUD Views
     item_create_view,
     item_detail_view,
-    item_update_view
+    item_update_view,
+    item_delete_view,
 )
 
 urlpatterns = [
@@ -41,8 +44,9 @@ urlpatterns = [
     path('thrift/profile-detail/<slug:slug>/', profile_detail_view, name="profile-detail"),
     path('thrift/profile-update/<slug:slug>/', profile_update_view, name="profile-update"),
     path('thrift/item-create/', item_create_view),
-    path('thrift/item-detail/<slug:slug>/', item_detail_view),
+    path('thrift/item-detail/<slug:slug>/', item_detail_view, name="item-detail"),
     path('thrift/item-update/<slug:slug>/', item_update_view),
+    path('thrift/item-delete/<slug:slug>/', item_delete_view),
     path('', home_view),
 ]
 

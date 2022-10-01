@@ -1,14 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ item_form.as_p }}
 
-    {% if item_image_formset %}
-    <h3>Pictures</h3>
-    {{ item_image_formset.as_p }}
-    {% endif %}
-    <input type="submit" name="add-item" value="Save">
-</form>
+{% include "thrift\partials\item-update-form.html" %}
+
 {% endblock content %}

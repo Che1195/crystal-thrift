@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if item %}
+
+<form method="POST" action=".">
+    {% csrf_token %}
+    <p>Are you sure you want to delete {{ item.title }}?</p>
+    <button type="submit">Yes, Delete</button>
+    <a href="/thrift/item-detail/{{item.slug}}">No, Don't Delete!</a>
+</form>
+
+{% endif %}
+
+{% endblock content %}

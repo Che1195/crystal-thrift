@@ -1,27 +1,45 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form method="POST" enctype="multipart/form-data">
-    <h3>{{ item.title }}<span> ${{item.price}}</span></h3>
-    <ul>
-        {% if item.sale_status == "sold" %}
-        <li>NO LONGER AVAILABLE</li>
-        {% elif item.sale_status == "pending" %}
-        <li>SALE PENDING</li>
-        {% else %}
-        <li>AVAILABLE</li>
-        {% endif %}
-        <li>listed by <a href="{{item.get_absolute_user_profile_url}}">{{item.user}}</a></li>
-        <li>{{item.description}}</li>
-        <!-- display images for the item -->
-        {% for image in images %}
+<h3>{{ item.title }}<span> ${{item.price}}</span></h3>
+<ul>
+    {% if item.sale_status == "sold" %}
+    <li>NO LONGER AVAILABLE</li>
+    {% elif item.sale_status == "pending" %}
+    <li>SALE PENDING</li>
+    {% else %}
+    <li>AVAILABLE</li>
+    {% endif %}
+    <li>listed by <a href="{{item.get_absolute_user_profile_url}}">{{item.user}}</a></li>
+    <li>{{item.description}}</li>
+
+    <!-- LIST PICTURES -->
+    {% if item.image1 %}
+    <li><img src="{{item.image1.url}}" alt="" style="width: 100px; height: 100px"></li>
+    {% endif %}
+    {% if item.image2 %}
+    <li><img src="{{item.image2.url}}" alt="" style="width: 100px; height: 100px"></li>
+    {% endif %}
+    {% if item.image3 %}
+    <li><img src="{{item.image3.url}}" alt="" style="width: 100px; height: 100px"></li>
+    {% endif %}
+    {% if item.image4 %}
+    <li><img src="{{item.image4.url}}" alt="" style="width: 100px; height: 100px"></li>
+    {% endif %}
+    {% if item.image5 %}
+    <li><img src="{{item.image5.url}}" alt="" style="width: 100px; height: 100px"></li>
+    {% endif %}
+
+
+    <!-- display images for the item -->
+    <!-- {% for image in images %}
         <li><img style="width: 100px; height: 100px" src="/static/media/{{image.image}}" alt="Picture of Item">
         </li>
-        {% endfor %}
-        <li>Condition: {{item.condition}}</li>
-        {% if item.user == user %}
-        <li><a href="/thrift/item-update/{{item.slug}}">Update Item</a></li>
-        {% endif %}
-    </ul>
-</form>
+        {% endfor %} -->
+    <li>Condition: {{item.condition}}</li>
+    {% if item.user == user %}
+    <li><a href="/thrift/item-update/{{item.slug}}">Update Item</a></li>
+    {% endif %}
+    <li><a href="/thrift/item-delete/{{item.slug}}">Delete Item</a></li>
+</ul>
 {% endblock content %}

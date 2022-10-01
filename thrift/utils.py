@@ -15,3 +15,7 @@ CHOICES = {
     'sale-status':
         (("available", "available"), ("pending", "pending"), ("sold", "sold"))
 }
+
+def item_image_upload_handler(instance, filename):
+    file_prefix = str(uuid.uuid1()) # uuid1 -> uuid + timestamps
+    return f"images{file_prefix}-{filename}" # creates a new file path for the upload upload adding the uuid to its original name
