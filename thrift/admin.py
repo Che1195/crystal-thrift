@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 
 # Register your models here.
-from .models import UserProfile, Item, ItemImage
+from .models import UserProfile, Item
 
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = ['id', 'slug', 'user', 'first_name', 'last_name', 'email']
@@ -16,8 +16,3 @@ class ItemAdmin(admin.ModelAdmin):
     readonly_fields = ['created', 'modified', 'date_sold', 'slug']
 
 admin.site.register(Item, ItemAdmin)  
-
-class ItemImageAdmin(admin.ModelAdmin):
-    list_display = ['image', 'item']
-
-admin.site.register(ItemImage, ItemImageAdmin)  

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third party
     'django_htmx',
+    'django_seed',
     # internal
     'accounts',
     'thrift',
