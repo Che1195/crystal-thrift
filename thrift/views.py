@@ -91,25 +91,18 @@ def item_create_view(request):
     profile_exists = UserProfile.objects.filter(user=request.user).exists()
     if profile_exists:
         if request.method == "POST":
-            form = ItemForm(request.POST)
-            files = request.FILES.getlist("image") # retrieves the files uploaded be the user
+            form = ItemForm(request.POST, request.FILES)
             if form.is_valid():
                 try:
                     item_obj = form.save(commit=False)
                     item_obj.user = request.user
                     item_obj.save()
-                    for image in files:
-                        # ADD image validation
-                        # ADD error handling
-                        ItemImage.objects.create(item = item_obj, image=image)
-
                     return redirect("/") # should take user to item detail page
                 except IntegrityError as e:
                     return redirect("/")
     else:
         context["msg"] = "You must create a profile first"
     context["form"] = ItemForm()
-    context["imageform"] = ItemImageForm()
     return render(request, "thrift/item-create.html", context)
 
 # need to implement slug fields for this to make sense

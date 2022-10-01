@@ -12,10 +12,7 @@
     {{ hidden }}
     {% endfor %}
     {{ form.as_p }}
-    {{ imageform.management_form }}
-    {% for form in imageform %}
-    {{ form }}
-    {% endfor %}
+
     <input type="submit" name="add-item" value="submit">
 </form>
 {% endblock content %}
