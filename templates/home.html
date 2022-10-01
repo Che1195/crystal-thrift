@@ -11,6 +11,10 @@
 {% endblock heading %}
 
 {% block content %}
+
+<!-- search component -->
+{% include 'search/search-form.html' %}
+
 <h2>List items for sale</h2>
 <ul>
     {% for item in items %}

@@ -39,7 +39,7 @@
     <li>Condition: {{item.condition}}</li>
     {% if item.user == user %}
     <li><a href="/thrift/item-update/{{item.slug}}">Update Item</a></li>
-    {% endif %}
     <li><a href="/thrift/item-delete/{{item.slug}}">Delete Item</a></li>
+    {% endif %}
 </ul>
 {% endblock content %}
