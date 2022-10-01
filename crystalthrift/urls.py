@@ -28,6 +28,7 @@ from thrift.views import (
     profile_create_view,
     profile_detail_view,
     profile_update_view,
+    user_delete_view,
     # Item CRUD Views
     item_create_view,
     item_detail_view,
@@ -38,16 +39,17 @@ from thrift.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', register_view),
-    path('login/', login_view),
+    path('login/', login_view, name="login"),
     path('logout/', logout_view),
     path('thrift/profile-create/', profile_create_view),
     path('thrift/profile-detail/<slug:slug>/', profile_detail_view, name="profile-detail"),
-    path('thrift/profile-update/<slug:slug>/', profile_update_view, name="profile-update"),
+    path('thrift/profile-update/<slug:slug>/', profile_update_view),
+    path('thrift/user-delete/<slug:slug>/', user_delete_view),
     path('thrift/item-create/', item_create_view),
     path('thrift/item-detail/<slug:slug>/', item_detail_view, name="item-detail"),
     path('thrift/item-update/<slug:slug>/', item_update_view),
     path('thrift/item-delete/<slug:slug>/', item_delete_view),
-    path('', home_view),
+    path('', home_view, name="home"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
