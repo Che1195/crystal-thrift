@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # internal
     'accounts',
     'thrift',
+    'search',
 ]
 
 MIDDLEWARE = [
