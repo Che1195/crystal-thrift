@@ -23,7 +23,7 @@
     <li>{{item.description}}</li>
 
     <!-- LIST PICTURES -->
-    {% if item.image2 %}
+    {% if item.image1 %}
     <li><img src="{{item.image1.url}}" alt="" style="width: 100px; height: 100px"></li>
     {% endif %}
     {% if item.image2 %}
@@ -43,9 +43,11 @@
 </ul>
 <br><br>
 {% endfor %}
+{% if request.user == profile_obj.user %}
 <h4><a href="/thrift/profile-update/{{profile_obj.slug}}/">Edit Profile</a></h4>
 <h3><a href="/thrift/user-delete/{{user.userprofile.slug}}">Delete Account</a></h3>
 
 <h3><a href="/thrift/item-create/">+ Item</a></h3>
+{% endif %}
 
 {% endblock content %}

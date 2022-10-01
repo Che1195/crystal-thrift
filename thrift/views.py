@@ -11,8 +11,8 @@ from django.db import IntegrityError
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
-from .forms import UserProfileForm, ItemForm, ItemImageForm, ItemUpdateForm
-from .models import UserProfile, Item, ItemImage
+from .forms import UserProfileForm, ItemForm, ItemUpdateForm
+from .models import UserProfile, Item
 
 from .models import UserProfile
 from .models import Item
@@ -109,10 +109,8 @@ def item_create_view(request):
 @login_required(login_url='/login/')
 def item_detail_view(request, slug):
     item_obj = Item.objects.get(slug=slug)
-    item_images = ItemImage.objects.filter(item__slug=slug) # a query of all item images related to this item
     context = {
         "item": item_obj,
-        "images": item_images
     }
     return render(request, "thrift/item-detail.html", context)
 

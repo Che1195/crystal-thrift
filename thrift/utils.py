@@ -19,3 +19,10 @@ CHOICES = {
 def item_image_upload_handler(instance, filename):
     file_prefix = str(uuid.uuid1()) # uuid1 -> uuid + timestamps
     return f"images{file_prefix}-{filename}" # creates a new file path for the upload upload adding the uuid to its original name
+
+def get_item_types_list():
+    """return list of item types listed in choices"""
+    types = []
+    for type in CHOICES["item-type"]:
+        types.append(type[0])
+    return types
