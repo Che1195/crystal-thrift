@@ -1,0 +1,22 @@
+<div>
+    <form action="/search/" method="GET">
+        <select id="search-type" name="type" hx-get="/search/" hx-trigger="change delay:200ms"
+            hx-target="#typeahead-results">
+            {% for type in types %}
+
+            {% if request.GET.type == type|lower %}
+            <option value="{{ type|lower }}" selected>{{ type }}</option>
+            {% else %}
+            <option value="{{ type|lower }}">{{ type }}</option>
+            {% endif %}
+
+            {% endfor %}
+        </select>
+
+        <input id="search-query" type="text" name="q" value="{{ request.GET.q }}" hx-get="/search/"
+            hx-trigger="keyup changed delay:200ms" hx-include="#search-type" hx-target="#typeahead-results">
+
+        <input type="submit" />
+    </form>
+    <div id="typeahead-results"></div>
+</div>
