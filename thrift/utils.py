@@ -25,4 +25,5 @@ def get_item_types_list():
     types = []
     for type in CHOICES["item-type"]:
         types.append(type[0])
+    types.insert(0, "All")
     return types

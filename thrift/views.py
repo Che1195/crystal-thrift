@@ -10,6 +10,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 from .forms import UserProfileForm, ItemForm, ItemUpdateForm
 from .models import UserProfile, Item
@@ -102,6 +103,7 @@ def item_create_view(request):
                     return redirect("/")
     else:
         context["msg"] = "You must create a profile first"
+        return HttpResponseRedirect("/thrift/profile-create/")
     context["form"] = ItemForm()
     return render(request, "thrift/item-create.html", context)
 

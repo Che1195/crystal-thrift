@@ -1,13 +1,15 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
 {% if request.user.is_authenticated %}
 
+<br><br>
 <form method="POST">
     {% csrf_token %}
     <p>Are you sure you want to logout?</p>
-    <button type="submit">Yes, Logout.</button>
+    <button class="btn light-blue lighten-3" type="submit">Yes, Logout.</button>
 </form>
 
 {% else %}

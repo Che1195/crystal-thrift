@@ -1,0 +1,64 @@
+/* LOGIN STYLING */
+
+#login-header {
+	text-align: center;
+}
+
+.material-tooltip {
+	background-color: #81d4fa;
+}
+
+/* ********************************************** */
+
+/* Home Page STYLING */
+
+#home-title {
+	margin-top: 0rem;
+	margin-left: 1rem;
+}
+
+/* ********************************************** */
+
+/* Utility */
+
+.errorlist {
+	color: palevioletred;
+}
+
+.btn-full-width {
+	width: 100%;
+}
+
+/* ********************************************** */
+
+::-webkit-file-upload-button {
+	background: #bdbdbd;
+	color: white;
+	padding: 0.5em;
+	border: none;
+}
+
+label {
+	font-size: 1.25rem;
+}
+
+textarea {
+	height: 25vh !important;
+}
+
+.card-image {
+	background-size: cover;
+	background-position: center;
+	display: block;
+	height: 25vh;
+}
+
+.custom-row {
+	padding-top: 2rem;
+}
+
+@media (max-height: 900px) {
+	.card-image {
+		height: 50vh;
+	}
+}

@@ -1,9 +1,20 @@
-Searched for {{ request.GET.q }} under {{ request.GET.type|title }}
+<!-- Searched for {{ request.GET.q }} under {{ request.GET.type|title }} -->
+<div class="row">
+    {% for item in queryset %}
 
-{% for object in queryset %}
-<li><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></li>
-{% empty %}
-<!-- % empty % -> if the query set is empty run the following code -->
-<li>No results found</li>
+    <!-- <li><a href="thrift/item-detail/{{item.slug}}/">{{item}}</a></li> -->
 
-{% endfor %}
+    <div class="col s12 m6 l6 xl4">
+        <a href=" /thrift/item-detail/{{item.slug}}/">
+            <div class="card">
+                <div class="card-image" style="background-image: url({{ item.image1.url }})">
+                    <!-- <img class="responsive-img" src="{{ item.image1.url }}"> -->
+                </div>
+                <div class=" card-content">
+                    <p>${{item.price}} - {{item.title}}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>

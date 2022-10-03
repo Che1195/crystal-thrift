@@ -62,7 +62,7 @@ class UserProfile(models.Model):
 class Item(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     slug = models.SlugField(null=True, default=uuid.uuid4)    
-    title = models.CharField(null=True, max_length=128)
+    title = models.CharField(null=True, max_length=64)
     description = models.TextField(null=True, max_length=512)
     condition = models.CharField(null=True, max_length=20, choices=CHOICES['condition'])
     item_type = models.CharField(null=True, max_length=20, choices=CHOICES['item-type'])

@@ -12,22 +12,23 @@
     {% endif %}
     <li>listed by <a href="{{item.get_absolute_user_profile_url}}">{{item.user}}</a></li>
     <li>{{item.description}}</li>
+    <li>{{item.item_type}}</li>
 
     <!-- LIST PICTURES -->
     {% if item.image1 %}
-    <li><img src="{{item.image1.url}}" alt="" style="width: 100px; height: 100px"></li>
+    <li><img src="{{item.image1.url}}" alt="" style="max-width: 90vw; max-height: 50vh"></li>
     {% endif %}
     {% if item.image2 %}
-    <li><img src="{{item.image2.url}}" alt="" style="width: 100px; height: 100px"></li>
+    <li><img src="{{item.image2.url}}" alt="" style="max-width: 50%; max-height: 50%"></li>
     {% endif %}
     {% if item.image3 %}
-    <li><img src="{{item.image3.url}}" alt="" style="width: 100px; height: 100px"></li>
+    <li><img src="{{item.image3.url}}" alt="" style="max-width: 50%; max-height: 50%"></li>
     {% endif %}
     {% if item.image4 %}
-    <li><img src="{{item.image4.url}}" alt="" style="width: 100px; height: 100px"></li>
+    <li><img src="{{item.image4.url}}" alt="" style="max-width: 50%; max-height: 50%"></li>
     {% endif %}
     {% if item.image5 %}
-    <li><img src="{{item.image5.url}}" alt="" style="width: 100px; height: 100px"></li>
+    <li><img src="{{item.image5.url}}" alt="" style="max-width: 50%; max-height: 50%"></li>
     {% endif %}
 
 

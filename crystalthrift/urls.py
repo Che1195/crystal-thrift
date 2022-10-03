@@ -36,6 +36,7 @@ from thrift.views import (
     item_delete_view,
 )
 from search.views import (
+    search_view,
     search_results_hx_view,
 )
 
@@ -57,7 +58,8 @@ urlpatterns = [
     path('thrift/item-update/<slug:slug>/', item_update_view),
     path('thrift/item-delete/<slug:slug>/', item_delete_view),
     # search views
-    path('search/', search_results_hx_view, name="search")
+    path('search-listings/', search_view, name="search-listings"),
+    path('search/', search_results_hx_view, name="search"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
