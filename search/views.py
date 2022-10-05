@@ -18,6 +18,9 @@ def search_results_hx_view(request):
     if search_type == "all":
         qs = Klass.objects.search(query=query)
 
+    # if search_type and not query:
+    #     qs = Klass.objects.all().filter(item_type=search_type.capitalize())
+
     context = {
         "queryset": qs,
         "types": get_item_types_list,

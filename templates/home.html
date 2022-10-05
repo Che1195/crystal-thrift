@@ -20,12 +20,13 @@
 {% block content %}
 
 {% if user.is_authenticated %}
+
 <ul>
 
-    <h4 id="home-title" class="grey-text text-darken-2">Today's Picks</h4>
+    <h4 class="grey-text text-darken-2 title">Today's Picks</h4>
 
 
-    <div hx-target="#typeahead-results" hx-swap="innerHTML" class="row">
+    <div class="row">
         {% for item in items %}
         <!-- <li><a href="thrift/item-detail/{{item.slug}}/">{{item}}</a></li> -->
 
@@ -35,8 +36,8 @@
                     <div class="card-image" style="background-image: url({{ item.image1.url }})">
                         <!-- <img class="responsive-img" src="{{ item.image1.url }}"> -->
                     </div>
-                    <div class=" card-content">
-                        <p class="truncate">${{item.price}} - {{item.title}}</p>
+                    <div class="card-content" style="padding: 0.75rem">
+                        <p class="black-text truncate">${{item.price}} | {{item.title}}</p>
                     </div>
                 </div>
             </a>

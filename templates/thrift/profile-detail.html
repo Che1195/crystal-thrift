@@ -1,53 +1,63 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link href="{% static 'css/profile-detail.css' %}" rel="stylesheet">
+{% endblock css %}
 
 {% block content %}
-<ul>
-    <li>{{ profile_obj.first_name }}</li>
-    <li>{{ profile_obj.last_name }}</li>
-    <li>
-        <img style="height:100px; width: 100px;" src="/static/media/{{ profile_obj.profile_picture }}"
-            alt="Profile Picture">
-    </li>
-    <li>{{ profile_obj.email }}</li>
-    <li>Building {{ profile_obj.building }}</li>
-    <li>Floor {{ profile_obj.floor }}</li>
-</ul>
-<h2>User Items</h2>
 
-{% for item in user_items %}
-<a href="/thrift/item-detail/{{item.slug}}/">
-    <h2>{{ item.title }}<span> ${{item.price}}</span></h2>
-</a>
-<ul>
-    <li>listed by {{item.user}}</li>
-    <li>{{item.description}}</li>
+<!-- User Info -->
+<div id="profile-card" class="z-depth-1">
+    <img class="z-depth-1" src="/static/media/{{ profile_obj.profile_picture }}" alt="Profile Picture">
+    <div id="info-container">
+        <h4 id="name-container">{{ profile_obj.first_name }} {{ profile_obj.last_name }}
+            {% if request.user == profile_obj.user %}
+            <!-- edit profile button -->
+            <span id="add-item-btn">
+                <a href="/thrift/item-create/" class="btn-floating btn-small waves-effect waves-light green">
+                    <i class="material-icons">add</i></a>
+            </span>
+            <!-- add item button -->
+            <span id="edit-profile-btn">
+                <a href="/thrift/profile-update/{{profile_obj.slug}}/"
+                    class="btn-floating btn-small waves-effect waves-light blue">
+                    <i class="material-icons">edit</i></a>
+            </span>
+            {% endif %}
+        </h4>
 
-    <!-- LIST PICTURES -->
-    {% if item.image1 %}
-    <li><img src="{{item.image1.url}}" alt="" style="width: 100px; height: 100px"></li>
-    {% endif %}
-    {% if item.image2 %}
-    <li><img src="{{item.image2.url}}" alt="" style="width: 100px; height: 100px"></li>
-    {% endif %}
-    {% if item.image3 %}
-    <li><img src="{{item.image3.url}}" alt="" style="width: 100px; height: 100px"></li>
-    {% endif %}
-    {% if item.image4 %}
-    <li><img src="{{item.image4.url}}" alt="" style="width: 100px; height: 100px"></li>
-    {% endif %}
-    {% if item.image5 %}
-    <li><img src="{{item.image5.url}}" alt="" style="width: 100px; height: 100px"></li>
-    {% endif %}
+        <!-- <div class="chip light-blue lighten-4">Email: {{ profile_obj.email }}</div> -->
+        <p id="contact-method">{{ profile_obj.contact_method }}</p>
 
-    <li>Condition: {{item.condition}}</li>
-</ul>
-<br><br>
-{% endfor %}
+    </div>
+
+</div>
+
+
+<!-- User's listings -->
+<h4 class="grey-text text-darken-2 title">Listings</h4>
+
+<div class="row">
+    {% for item in items %}
+    <!-- <li><a href="thrift/item-detail/{{item.slug}}/">{{item}}</a></li> -->
+
+    <div class="col s12 m6 l6 xl4">
+        <a href=" /thrift/item-detail/{{item.slug}}/">
+            <div class="card">
+                <div class="card-image" style="background-image: url({{ item.image1.url }})"></div>
+                <div class="card-content" style="padding: 0.75rem">
+                    <p class="black-text truncate">${{item.price}} | {{item.title}}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    {% endfor %}
+</div>
 {% if request.user == profile_obj.user %}
-<h4><a href="/thrift/profile-update/{{profile_obj.slug}}/">Edit Profile</a></h4>
-<h3><a href="/thrift/user-delete/{{user.userprofile.slug}}">Delete Account</a></h3>
-
-<h3><a href="/thrift/item-create/">+ Item</a></h3>
+<a href="/thrift/user-delete/{{user.userprofile.slug}}" class="btn-large waves-effect waves-light red">
+    Delete Account?</a>
 {% endif %}
 
 {% endblock content %}

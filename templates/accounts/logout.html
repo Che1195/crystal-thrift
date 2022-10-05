@@ -9,7 +9,8 @@
 <form method="POST">
     {% csrf_token %}
     <p>Are you sure you want to logout?</p>
-    <button class="btn light-blue lighten-3" type="submit">Yes, Logout.</button>
+    <button class="btn light-blue lighten-3" type="submit">Yes, logout</button>
+    <a href="/">Nevermind</a>
 </form>
 
 {% else %}

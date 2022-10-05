@@ -7,19 +7,18 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/htmx.org@1.8.0"></script>
 
+    <!-- load CSS files -->
     {% block css %}
+    {% endblock css %}
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/css/materialize.min.css"
         integrity="sha256-qj3p6P1fJIV+Ndv7RW1ovZI2UhOuboj9GcODzcNFIN8=" crossorigin="anonymous" />
-    {% endblock css %}
-
-    <script src="https://unpkg.com/htmx.org@1.8.0"></script>
-    <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
 
     <title>Crystal Thrift</title>
 </head>
@@ -70,7 +69,7 @@
         <li><a href="/thrift/item-create/"><i class="small material-icons" style=>add_to_photos</i> New
                 Listing</a>
         </li>
-        <li><a href="/search-listings/"><i class="small material-icons" style=>search</i> search
+        <li><a href="/search-listings/"><i class="small material-icons" style=>search</i> Search
                 Listings</a>
         </li>
         {% endif %}
@@ -88,7 +87,7 @@
         <li><a href="/logout"><i class="small material-icons" style=>vpn_key</i>Logout</a></li>
         {% endif %}
         {% if not user.is_authenticated %}
-        <li><a href="/logout"><i class="small material-icons" style=>vpn_key</i>Login</a></li>
+        <li><a href="/logout"><i class="small material-icons" style=>open_in_browser</i>Login</a></li>
         <li><a href="/logout"><i class="small material-icons" style=>assignment_turned_in</i>Register</a></li>
         {% endif %}
 
@@ -116,6 +115,7 @@
         {% endblock content %}
     </div>
     {% block javascript %}
+    {% endblock javascript %}
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
@@ -128,6 +128,7 @@
             $('select').addClass("browser-default").formSelect();
             $('.sidenav').sidenav();
             $('.tooltipped').tooltip({ enterDelay: 500 });
+            $('.scrollspy').scrollSpy();
             // prevents users from submitting form by hitting enter
             $(window).keydown(function (event) {
                 if (event.keyCode == 13) {
@@ -136,12 +137,8 @@
                 }
             });
         });
-
-
-
-
     </script>
-    {% endblock javascript %}
+
 
 </body>
 

@@ -12,9 +12,16 @@
 
 /* Home Page STYLING */
 
-#home-title {
-	margin-top: 0rem;
-	margin-left: 1rem;
+/* ********************************************** */
+
+/* Search Page STYLING */
+
+#sticky-search {
+	padding-top: 0.6rem;
+	position: sticky; /* The magic */
+	z-index: 1; /* Ensure it stays on top of other player divs */
+	top: 4rem; /* Where it should stick to */
+	background-color: white;
 }
 
 /* ********************************************** */
@@ -27,6 +34,11 @@
 
 .btn-full-width {
 	width: 100%;
+}
+
+.title {
+	margin-top: 0rem;
+	margin-left: 1rem;
 }
 
 /* ********************************************** */
