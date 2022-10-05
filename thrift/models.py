@@ -41,10 +41,11 @@ class UserProfile(models.Model):
     slug = models.SlugField(default=uuid.uuid4, null=True)
     first_name = models.CharField(max_length=128)
     last_name = models.CharField(max_length=128)
-    profile_picture = models.ImageField(null=True, blank=True, upload_to="images/") 
+    profile_picture = models.ImageField(null=True, blank=True, upload_to="images/")
+    contact_method = models.TextField(default="contact me at...", max_length=256)
     email = models.EmailField(max_length=128)
-    building = models.CharField(blank=True, null=True, choices=CHOICES['building'], max_length=1)
-    floor = models.CharField(blank=True, null=True, choices=CHOICES['floor'], max_length=2)
+    # building = models.CharField(blank=True, null=True, choices=CHOICES['building'], max_length=1)
+    # floor = models.CharField(blank=True, null=True, choices=CHOICES['floor'], max_length=2)
     created = models.DateTimeField(null=True, editable=False)
     modified = models.DateTimeField(null=True)
 
@@ -62,7 +63,7 @@ class UserProfile(models.Model):
 class Item(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     slug = models.SlugField(null=True, default=uuid.uuid4)    
-    title = models.CharField(null=True, max_length=128)
+    title = models.CharField(null=True, max_length=64)
     description = models.TextField(null=True, max_length=512)
     condition = models.CharField(null=True, max_length=20, choices=CHOICES['condition'])
     item_type = models.CharField(null=True, max_length=20, choices=CHOICES['item-type'])

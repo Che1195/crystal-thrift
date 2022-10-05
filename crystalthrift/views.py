@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+
 from thrift.utils import get_item_types_list
 
 from thrift.models import Item
@@ -9,6 +11,7 @@ def home_view(request):
     if request.user.is_authenticated:
         items = Item.objects.exclude(user=request.user).order_by('-created')
     else:
+        return HttpResponseRedirect("/login/")
         items = Item.objects.order_by('-created')
     context = {
         "items": items,

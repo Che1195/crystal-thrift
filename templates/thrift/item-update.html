@@ -2,6 +2,24 @@
 
 {% block content %}
 
-{% include "thrift\partials\item-update-form.html" %}
+{% if msg %}
+<p>{{ msg }}</p>
+{% endif %}
+<form method="POST" enctype="multipart/form-data">
+    <!-- 
+        hx-swap="outerHTML" -> without this the form would get nested inside of itself everytime you hit save
+            now it will be swapped and replaced with the newly saved form data
+     -->
+    {% csrf_token %}
+    {{ item_form.as_p }}
+
+    {% if item_image_formset %}
+    <h3>Pictures</h3>
+    {{ item_image_formset.management_form }}
+    {{ item_image_formset.as_p }}
+    {% endif %}
+    <input class="btn light-blue lighten-3" type="submit" name="add-item" value="Save">
+    <br>
+</form>
 
 {% endblock content %}

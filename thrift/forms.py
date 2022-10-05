@@ -20,6 +20,9 @@ class ItemForm(forms.ModelForm):
         model = Item
         fields = "__all__"
         exclude = ['user', 'slug', 'modified', 'sale_status']
+        widgets = {
+            "description": forms.Textarea(attrs={'rows':10, 'cols':15}),
+        }
     
     def clean(self):
         """making sure all data being submitted is eligible"""
