@@ -1,10 +1,7 @@
 from django import forms
-from .models import UserProfile, Item, ItemImage
+from .models import UserProfile, Item
 from datetime import datetime
 
-
-
-# TODO
 # create validators for
 #   - email, building, floor 
 
@@ -23,6 +20,9 @@ class ItemForm(forms.ModelForm):
         model = Item
         fields = "__all__"
         exclude = ['user', 'slug', 'modified', 'sale_status']
+        widgets = {
+            "description": forms.Textarea(attrs={'rows':10, 'cols':15}),
+        }
     
     def clean(self):
         """making sure all data being submitted is eligible"""
@@ -33,13 +33,3 @@ class ItemUpdateForm(forms.ModelForm):
         model = Item
         fields = "__all__"
         exclude = ['user', 'slug', 'modified']
-
-class ItemImageForm(forms.ModelForm):
-    image = forms.ImageField(
-        label = "Image",
-        widget = forms.ClearableFileInput(attrs={"multiple": True}), # "multiple" allows us to use have multiple files get uploaded in the input field
-    )
-
-    class Meta:
-        model = ItemImage
-        fields = ["image"]

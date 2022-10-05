@@ -10,9 +10,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from django.http import HttpResponseRedirect
 
-from .forms import UserProfileForm, ItemForm, ItemImageForm, ItemUpdateForm
-from .models import UserProfile, Item, ItemImage
+from .forms import UserProfileForm, ItemForm, ItemUpdateForm
+from .models import UserProfile, Item
 
 from .models import UserProfile
 from .models import Item
@@ -50,7 +51,7 @@ def profile_detail_view(request, slug):
         user_items = Item.objects.order_by("-created").filter(user=profile_obj.user)
         context = {
             'profile_obj': profile_obj,
-            'user_items': user_items,
+            'items': user_items,
         }
     except ObjectDoesNotExist:
         return redirect("/thrift/profile-create/")
@@ -102,6 +103,7 @@ def item_create_view(request):
                     return redirect("/")
     else:
         context["msg"] = "You must create a profile first"
+        return HttpResponseRedirect("/thrift/profile-create/")
     context["form"] = ItemForm()
     return render(request, "thrift/item-create.html", context)
 
@@ -109,10 +111,8 @@ def item_create_view(request):
 @login_required(login_url='/login/')
 def item_detail_view(request, slug):
     item_obj = Item.objects.get(slug=slug)
-    item_images = ItemImage.objects.filter(item__slug=slug) # a query of all item images related to this item
     context = {
         "item": item_obj,
-        "images": item_images
     }
     return render(request, "thrift/item-detail.html", context)
 
@@ -128,8 +128,7 @@ def item_update_view(request, slug):
         item_form = item_form.save(commit=False)
         item_form.save()
         context["msg"] = "Data saved."
-        success_url = reverse("item-detail", kwargs={"slug": item_obj.slug})
-        return redirect(success_url)
+        return render(request, "thrift/item-detail.html", context)
     return render(request, "thrift/item-update.html", context)
 
 @login_required(login_url='/login/')

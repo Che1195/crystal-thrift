@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-%f25v!-i^c*pgf&x7kv3kmvte&=*b8%9$!c9rj8xh&dfn22jya
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["10.0.0.183", "127.0.0.1"]
 
 
 # this matters the most for models it looks like
@@ -39,9 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third party
     'django_htmx',
+    'django_seed',
+    'materializecssform',
+    'crispy_forms',
     # internal
     'accounts',
     'thrift',
+    'search',
 ]
 
 MIDDLEWARE = [
@@ -120,20 +124,21 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+# CRISPY_TEMPLATE_PACK = 'uni_form'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static'),
 ] # this allows us to put the media folder in the static folder
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media') + "/" # defines the url path of our media
 MEDIA_URL = '/media/' 
 # defines the url path to the media folder
 # media directory created automatically when we upload our first image
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

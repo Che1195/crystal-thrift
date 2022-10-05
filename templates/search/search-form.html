@@ -1,0 +1,32 @@
+<div>
+    <form action="/search/" method="GET" id="sticky-search">
+
+        <div class="row">
+            <div class="col s4 m4 l4 xl4">
+                <select id="search-type" name="type" hx-get="/search/" hx-trigger="change"
+                    hx-target="#typeahead-results" hx-include="#search-query" name="type"
+                    value="{{ request.GET.type }}">
+                    {% for type in types %}
+
+                    {% if request.GET.type == type|lower %}
+                    <option value="{{ type|lower }}" selected>{{ type }}</option>
+                    {% else %}
+                    <option value="{{ type|lower }}">{{ type }}</option>
+                    {% endif %}
+
+                    {% endfor %}
+                </select>
+            </div>
+
+
+            <div class="col s8 m8 l8 xl8">
+                <input id="search-query" type="text" placeholder="search for item" name="q" value="{{ request.GET.q }}"
+                    hx-get="/search/" hx-trigger="keyup changed delay:200ms" hx-include="#search-type"
+                    hx-target="#typeahead-results">
+            </div>
+        </div>
+
+
+    </form>
+    <div id="typeahead-results" hx-swap="innerHTML"></div>
+</div>

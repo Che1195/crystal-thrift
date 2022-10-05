@@ -2,6 +2,7 @@
 ### db.sqlite3
 venv/
 Lib/
+Scripts/
 
 .idea/
 uploaded_media/
