@@ -3,7 +3,17 @@
 {% block content %}
 {% if user.userprofile %}
 
-{% include "thrift\partials\profile-update-form.html" %}
+<!-- the enctype attribute is telling our form that it is ok to accept data -->
+{% if msg %}
+<p>{{ msg }}</p>
+{% endif %}
+<h4 class="grey-text text-darken-1 center">Update Profile</h4>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br>
+    <input class="btn light-blue lighten-3" type="submit" value="Update Profile"></input>
+</form>
 
 {% else %}
 {{ msg }}

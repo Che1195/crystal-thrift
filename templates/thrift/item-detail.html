@@ -46,7 +46,6 @@
             </div>
             {% endif %}
 
-
             <!-- Next and previous buttons -->
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -61,33 +60,32 @@
             <span class="dot" onclick="currentSlide(4)"></span>
             <span class="dot" onclick="currentSlide(5)"></span>
         </div>
-
-
     </div>
 
-
     <div class="item-info">
-        <h3>{{ item.title }}<span> ${{item.price}}</span></h3>
-        <ul>
-            {% if item.sale_status == "sold" %}
-            <li>NO LONGER AVAILABLE</li>
-            {% elif item.sale_status == "pending" %}
-            <li>SALE PENDING</li>
-            {% else %}
-            <li>AVAILABLE</li>
-            {% endif %}
-            <li>listed by <a href="{{item.get_absolute_user_profile_url}}">{{item.user}}</a></li>
-            <li>{{item.description}}</li>
-            <li>{{item.item_type}}</li>
-
-
-
-            <li>Condition: {{item.condition}}</li>
-            {% if item.user == user %}
-            <li><a href="/thrift/item-update/{{item.slug}}">Update Item</a></li>
-            <li><a href="/thrift/item-delete/{{item.slug}}">Delete Item</a></li>
-            {% endif %}
-        </ul>
+        <h4 id="item-info-title">{{ item.title }}<span> ${{item.price}}</span></h4>
+        {% if item.sale_status == "sold" %}
+        <div class="chip red lighten-3">NO LONGER AVAILABLE</div>
+        {% elif item.sale_status == "pending" %}
+        <div class="chip yellow lighten-3">SALE PENDING</div>
+        {% else %}
+        <div class="chip green lighten-3">AVAILABLE</div>
+        {% endif %}
+        <span>
+            <a href="{{item.get_absolute_user_profile_url}}">
+                <div class="chip">
+                    <img src="{{item.get_absolute_user_profile.profile_picture.url}}" alt="Contact Person">
+                    {{item.get_absolute_user_profile.first_name}}
+                </div>
+            </a>
+        </span>
+        <br>
+        <div id="item-description">{{item.description}}</div>
+        <br>
+        {% if item.user == user %}
+        <a id="update-btn" class="btn-small grey lighten-1" href="/thrift/item-update/{{item.slug}}">Update</a>
+        <a id="delete-btn" class="btn-small red lighten-2" href="/thrift/item-delete/{{item.slug}}">Delete</a>
+        {% endif %}
     </div>
 </div>
 

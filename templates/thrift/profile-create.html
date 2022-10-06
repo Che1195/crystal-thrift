@@ -4,7 +4,7 @@
 {% block content %}
 {% if not user.userprofile %}
 <!-- the enctype attribute is telling our form that it is ok to accept data -->
-<h4>Create a profile</h4>
+<h4 class="grey-text text-darken-1 center">Create Profile</h4>
 <br>
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}

@@ -1,9 +1,0 @@
-<!-- the enctype attribute is telling our form that it is ok to accept data -->
-{% if msg %}
-<p>{{ msg }}</p>
-{% endif %}
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Update Profile"></input>
-</form>

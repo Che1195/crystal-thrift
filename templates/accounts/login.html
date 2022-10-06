@@ -6,12 +6,12 @@
 <h1>You are already logged in</h1>
 {% else %}
 
-<div class="row" style="padding-top: 2rem">
-    <div class="col s0 m0 l6 xl6 ">
+<div id="login-container" style="padding-top: 2rem">
+    <div>
         <img class="hide-on-med-and-down" src="{% static 'assets/store.png' %}" alt="Picture"
             style="margin-top:3rem; width: 90%">
     </div>
-    <div class="col s12 m6 offset-m3 l6 xl6">
+    <div>
         <h3 id="login-header">Log In</h3>
         <form method="POST" action="">
             {% csrf_token %}

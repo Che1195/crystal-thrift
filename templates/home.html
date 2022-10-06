@@ -2,49 +2,33 @@
 
 {% block heading %}
 
-{% if not user.is_authenticated %}
-<h1>Welcome to Crystal Thrift</h1>
-<p>
-    Do you have something valuable that you don't want anymore
-    but think someone else might? Post it here so your neighbors
-    can see it.
-
-    Easy way to make money and help your fellow neighbors out.
-</p>
-
-
-{% endif %}
-
 {% endblock heading %}
 
 {% block content %}
 
 {% if user.is_authenticated %}
 
-<ul>
-
-    <h4 class="grey-text text-darken-2 title">Today's Picks</h4>
+<h4 class="grey-text text-darken-2 title">Today's Picks</h4>
 
 
-    <div class="row">
-        {% for item in items %}
-        <!-- <li><a href="thrift/item-detail/{{item.slug}}/">{{item}}</a></li> -->
+<div class="row">
+    {% for item in items %}
+    <!-- <li><a href="thrift/item-detail/{{item.slug}}/">{{item}}</a></li> -->
 
-        <div class="col s12 m6 l6 xl4">
-            <a href=" /thrift/item-detail/{{item.slug}}/">
-                <div class="card">
-                    <div class="card-image" style="background-image: url({{ item.image1.url }})">
-                        <!-- <img class="responsive-img" src="{{ item.image1.url }}"> -->
-                    </div>
-                    <div class="card-content" style="padding: 0.75rem">
-                        <p class="black-text truncate">${{item.price}} | {{item.title}}</p>
-                    </div>
+    <div class="col s12 m6 l6 xl4">
+        <a href=" /thrift/item-detail/{{item.slug}}/">
+            <div class="card">
+                <div class="card-image" style="background-image: url({{ item.image1.url }})">
+                    <!-- <img class="responsive-img" src="{{ item.image1.url }}"> -->
                 </div>
-            </a>
-        </div>
-
-        {% endfor %}
+                <div class="card-content" style="padding: 0.75rem">
+                    <p class="black-text truncate">${{item.price}} | {{item.title}}</p>
+                </div>
+            </div>
+        </a>
     </div>
-</ul>
+
+    {% endfor %}
+</div>
 {% endif %}
 {% endblock content %}
