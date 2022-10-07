@@ -21,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "@mz*gh++o2*elvii4itk-4p%#^n-t3ays_4mh5$h0tl%(t%pmc"
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', "@mz*gh++o2*elvii4itk-4p%#^n-t3ays_4mh5$h0tl%(t%pmc")
 # SECRET_KEY = 'django-insecure-%f25v!-i^c*pgf&x7kv3kmvte&=*b8%9$!c9rj8xh&dfn22jya'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = False # str(os.environ.get('DEBUG')) == '1' # 1 == True
+DEBUG = str(os.environ.get('DEBUG')) == '1' # 1 == True
 
 ALLOWED_HOSTS = ['crystal-thrift.herokuapp.com','10.0.0.183', '127.0.0.1']
 if not DEBUG:
@@ -61,7 +61,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_htmx.middleware.HtmxMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'crystalthrift.urls'
