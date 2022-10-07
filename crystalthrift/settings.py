@@ -28,6 +28,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', "@mz*gh++o2*elvii4itk-4p%#^n-t3
 # DEBUG = True
 DEBUG = str(os.environ.get('DEBUG')) == '1' # 1 == True
 
+ENV_ALLOWED_HOST = os.environ.get('DJANGO_ALLOWED_HOST') or None
 ALLOWED_HOSTS = ['crystal-thrift.herokuapp.com','10.0.0.183', '127.0.0.1']
 if not DEBUG:
     ALLOWED_HOSTS += [os.environ.get('DJANGO_ALLOWED_HOST')]
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'django_seed',
     'materializecssform',
     'crispy_forms',
+    'storages',
     # internal
     'accounts',
     'thrift',
@@ -159,7 +161,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static", 
+]
+
+STATIC_ROOT = BASE_DIR / "staticfiles-cdn"
+
+from .cdn.conf import * #noqa
+
+# https://crystal-thrift.nyc3.digitaloceanspaces.com
+# https://www.codingforentrepreneurs.com/blog/django-static-files-digitalocean-spaces/
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),

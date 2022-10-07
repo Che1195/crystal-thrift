@@ -6,7 +6,7 @@
 {% endblock css %}
 
 {% block content %}
-
+{{ profile_obj.profile_picture }}
 <!-- User Info -->
 <div id="profile-card" class="z-depth-1">
     <img class="z-depth-1" src="/static/media/{{ profile_obj.profile_picture }}" alt="Profile Picture">
@@ -42,13 +42,16 @@
 <!-- User's listings -->
 <h4 class="grey-text text-darken-2 title">Listings</h4>
 
+
 <div class="row">
     {% for item in items %}
+    <!-- {{ item.image1.url }} -->
     <!-- <li><a href="thrift/item-detail/{{item.slug}}/">{{item}}</a></li> -->
 
     <div class="col s12 m6 l6 xl4">
         <a href=" /thrift/item-detail/{{item.slug}}/">
             <div class="card">
+                <img class="z-depth-1" src="/static/media/{{ item.image1 }}" alt="Profile Picture">
                 <div class="card-image" style="background-image: url({{ item.image1.url }})"></div>
                 <div class="card-content" style="padding: 0.75rem">
                     <p class="black-text truncate">${{item.price}} | {{item.title}}</p>
